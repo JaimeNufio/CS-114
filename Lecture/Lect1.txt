@@ -1,0 +1,43 @@
+Sept 8:
+
+1. Recursion:
+	-Restating problem through smaller version of problem
+	-alt. to iteration
+	a) Sequential Search
+		-begining of array/sub-array
+		-if array index > array.length
+		-if array[index] is equal to key, return index
+		-call method, but on index+1
+	b) Binary Search
+		-log time
+		-ex: guessing game 1 - 100
+			-50, less or more? 25... 25/2... etc
+			-takes log (100) base 2; 7 or so guess
+
+		Algorithim:
+			-3 variables int: left, right middle
+			-middle assigned right/2
+			-fails if left > right
+	
+			-set varible cmp
+
+			...
+
+			study later.
+
+	c) Recursive Factorial
+	d) Reverse Text Example
+	e) Searching an Array: to find the largest
+		-probs shouldn't do recursively
+		-to search, it takes n-1 comparisions, where n is the size of array
+		-n - lgn - 2, for second smallest
+		-kth smallest takes, (n-1)+(n-2), 2n-3
+			This is quick sort, apparently.
+
+1.5 Refresher:
+	-Generics:
+		 <T extends Comparable<? super T>>
+	   		^for whatever type T, extend comparable
+				^some unkown superclass of T, can implement comparable
+	-
+

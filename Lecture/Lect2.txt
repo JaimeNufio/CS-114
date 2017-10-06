@@ -1,0 +1,8 @@
+
+Tower of Hanoi
+	-3 High level steps
+	- move top 3 to tower B
+		then largest A to C
+	
+Recursion and Efficency
+	-Recursion is not perfect

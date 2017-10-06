@@ -1,0 +1,76 @@
+Midterm - 27th Of Oct
+Review that week (20th I believe he said)
+
+-Recursively Insert Linked List
+	-Public version calls private, private recurses over
+		Insert as defined in interface:
+			void insert(E data)
+		But you cannot recurse into that.
+
+		So we call a private method
+	-So what we do is create a private:
+		Node<E> insert (Node <e> curr, Node<E>node){ 
+			//Where curr is current node
+			//reffering to head in recursive method will screw things up, instead reffer to curr 	
+			//So we can think of curr as being a temp head of the list
+			insert(head,temp);
+			return (new node of linked list);
+
+			Ex: Not before first node
+				->[F|]->[G|]->
+				when we get to G, we return it to assign F next as G
+
+						curr
+				->[F|]	->	[H|]->
+					[G|/] temp
+
+				Insert G before H:
+					Set G.next as H
+					return G so that F.next can point at G
+
+
+			Ex:
+				->[F|]  curr = null
+					[G|]
+
+				Insert into empty is the same case as inbetween. Curr can be null
+
+			**Apparently there are No Special cases
+
+			When head is null, and we want to insert a new node
+			[null] head
+			
+			[B|/]
+
+			curr0 = null //that's head
+			node temp = B
+
+			head = insert(head,temp); //because java has no return on reffrences, s owe have to reasign. Duh.
+
+			Ex: 
+
+				[A|] [B|]
+
+				head (and curr) is B, inserting before A
+				Node next = curr; return node.
+
+			**Node next is curr for both cases, because it should always return null?
+
+
+				[A|] -> [B|] -> [D|/]
+
+				is cur0 null? no.
+				is cur1 (B) null? yes.
+				us cur2 (null)? yes. (next curr funct)
+				cur1.next = D;
+				
+				cur1 is B, so return cur1
+				cur0.next = B
+				
+
+
+	Functions
+	Private Node<E> insert(Node<E> curr, Node<E> node)
+	Node <E> remove(Node<E> curr, E key)
+	head = remove(head, key);
+
