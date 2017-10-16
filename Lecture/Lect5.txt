@@ -1,0 +1,27 @@
+Lect 5:
+
+	Backtracking (Chp 6):
+
+		Backtracking is a way of solving a solution, and going back when there is an impasse
+		
+		Mazes:
+			Solvable through Right or Left Hand rule
+			Maze is effectively a corridor
+			When a dead end is reached, you are turned around
+
+		The Eight Queens Problem:
+			Place 8 queens on a chessboard so that no queen can attack each other
+
+			Solutions:
+				Try and check, brute force. (Bad idea, 4.5+ Billion examples) (64 C 8)
+					But we can be smarter about the guessing! 
+						-Recognize that no two queens can be in the same row! (Solutions # go to 8!)
+				Strategy:
+					Check each row, see if there is a valid pos for the queen in each column, then move to next
+					repeat until all queens can be placed.:w
+
+
+Project 2:
+	Knights Tour:
+		Create a solution to Knights tour, recursively, for 8x8 chess board
+
