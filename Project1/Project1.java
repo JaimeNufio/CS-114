@@ -1,6 +1,13 @@
 import java.util.Iterator;
 import java.util.Random;
 
+/*
+	Jaime Nufio, Jen25
+	CS114-005, Prof Kapleau
+
+	Vim w/ Tabstop=4.
+
+*/
 public class Project1{
 
     public static void main(String[] args) {
@@ -20,14 +27,11 @@ public class Project1{
             System.out.println();
         }
 
-		System.out.println(list.retrieve(5));
-		System.out.println(list.retrieve(40));
-
-        // rand = new Random(1);
+        // 	rand = new Random(1);
 
         System.out.println("remove");
         for (int i = 0; i < m; ++i) {
-            int n = 10-i;//rand.nextInt(m);
+            int n = i;//rand.nextInt(m);
             list.remove(n);
             System.out.print(n + ": ");
             for (Integer j : list) {
@@ -35,6 +39,8 @@ public class Project1{
             }
             System.out.println();
         }
+
+		//	System.out.println(list.hasNext());
     }
 }
 
@@ -62,7 +68,10 @@ abstract class List<E> implements Iterable<E> {
 class SortedList<E extends Comparable<? super E>> extends List<E> {
 
     public void insert(E data){
-		
+	    
+		//I decided to settle the special case outside of the recursion. 
+		//This way we can avoid checking that one-tme condition over again.
+
 		Node<E>temp = new Node<E>(data);
 		
 		if (head == null || data.compareTo(head.data)<0){
@@ -71,9 +80,13 @@ class SortedList<E extends Comparable<? super E>> extends List<E> {
 		}else{	
 			insert(temp, head);
 		}
+
 	}
 
 	public void insert(Node<E> temp, Node<E> curr){
+
+		//I feel like I used too many if statements.
+
 		if (curr != null && curr.next != null){
 			if (temp.data.compareTo(curr.next.data) < 0){
 				temp.next = curr.next;
@@ -87,9 +100,12 @@ class SortedList<E extends Comparable<? super E>> extends List<E> {
 	}
 
 	public void remove(E data){
+		
+		//handle the special case w/o regression
+		
 		if (head != null){ 
 			if (data.compareTo(head.data) == 0)
-				head = head.next; //handle the special case w/o regression
+				head = head.next; 
 		}else
 			return; //empty set.
 	
@@ -97,6 +113,7 @@ class SortedList<E extends Comparable<? super E>> extends List<E> {
 	}
 
 	public void remove(E data, Node<E> curr){
+
 		if (curr != null && curr.next != null){
 			if(data.compareTo(curr.next.data) == 0){
 				curr.next = curr.next.next;
@@ -111,37 +128,40 @@ class SortedList<E extends Comparable<? super E>> extends List<E> {
 	}
 
 	public E retrieve(Node<E> curr, int index, int count){
+		
+		//No special cases as far as I can tell.
+			
 		if (count == index){
 			return curr.data;
 		}
-		
-		return retrieve(curr,index,++count);
+		if (curr.next != null)
+			return retrieve(curr.next,index,++count);
+		else
+			throw new IndexOutOfBoundsException();
 	}
 
-    public E oldRetrieve(int index) {
+	public boolean search(E data){
+		return search(data, head);
+	}
 
-        E temp = null;
-        int i = 0;
+	public boolean search(E data, Node<E> curr){
 
-        for (Node<E> curr = head; curr != null; curr = curr.next, ++i) {
-            if (i == index) {
-                temp = curr.data;
-                break;
-            }
-        }
-        return temp;
-    }
+		//two cases. Find, or not found.
+		//Also, its kinda odd it doesn't 
+		//return the value, but hey. 
+		//Sometimes you just gotta know
+		//what's in a set lol
 
-    public boolean search(E data) {
+		if (data.compareTo(curr.data) == 0){
+			return true;
+		}
 
-        for (Node<E> curr = head; curr != null; curr = curr.next) {
-            if (data.compareTo(curr.data) == 0) {
-                return true;
-            }
-        }
-
-        return false;
-    }
+		if (curr.next != null){
+			return search(data,curr.next);
+		}
+		
+		return false;
+	}
 			
     public Iterator<E> iterator() {
 
@@ -161,3 +181,4 @@ class SortedList<E extends Comparable<? super E>> extends List<E> {
         };
     }
 }
+
