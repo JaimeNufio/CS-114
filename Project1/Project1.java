@@ -17,8 +17,8 @@ public class Project1{
         int m = args.length == 1 ? Integer.parseInt(args[0]) : 10;
 
         System.out.println("insert");
-        for (int i = 0; i < m; ++i) {
-            int n = 10-i;//rand.nextInt(m);
+		for (int i = 0; i < m; ++i) {
+            int n = rand.nextInt(m);
             list.insert(n);
             System.out.print(n + ": ");
             for (Integer j : list) {
@@ -26,12 +26,14 @@ public class Project1{
             }
             System.out.println();
         }
-
+	for(Integer i : list){
+		System.out.println(i);
+	}
         // 	rand = new Random(1);
 
         System.out.println("remove");
         for (int i = 0; i < m; ++i) {
-            int n = i;//rand.nextInt(m);
+            int n = rand.nextInt(m);
             list.remove(n);
             System.out.print(n + ": ");
             for (Integer j : list) {
@@ -40,7 +42,6 @@ public class Project1{
             System.out.println();
         }
 
-		//	System.out.println(list.hasNext());
     }
 }
 
@@ -87,7 +88,7 @@ class SortedList<E extends Comparable<? super E>> extends List<E> {
 
 		//I feel like I used too many if statements.
 
-		if (curr != null && curr.next != null){
+		if (curr.next != null){
 			if (temp.data.compareTo(curr.next.data) < 0){
 				temp.next = curr.next;
 				curr.next = temp;
@@ -114,7 +115,7 @@ class SortedList<E extends Comparable<? super E>> extends List<E> {
 
 	public void remove(E data, Node<E> curr){
 
-		if (curr != null && curr.next != null){
+		if (curr.next != null){
 			if(data.compareTo(curr.next.data) == 0){
 				curr.next = curr.next.next;
 				return;
@@ -129,8 +130,6 @@ class SortedList<E extends Comparable<? super E>> extends List<E> {
 
 	public E retrieve(Node<E> curr, int index, int count){
 		
-		//No special cases as far as I can tell.
-			
 		if (count == index){
 			return curr.data;
 		}
@@ -162,10 +161,12 @@ class SortedList<E extends Comparable<? super E>> extends List<E> {
 		
 		return false;
 	}
-			
+	
+		
     public Iterator<E> iterator() {
 
         return new Iterator<E>() {
+
             public boolean hasNext() {
                 return curr != null;
             }
@@ -175,7 +176,7 @@ class SortedList<E extends Comparable<? super E>> extends List<E> {
                 return temp;
             }
             public void remove() {
-                throw new UnsupportedOperationException();
+				throw new UnsupportedOperationException();
             }
             private Node<E> curr = (Node<E>)head;
         };
