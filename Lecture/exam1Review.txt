@@ -1,0 +1,49 @@
+Midterm Review Day:
+
+	5-6 Questions
+
+	Open-ended, but not all necesarily programing
+		-Data Structures and Algoritihims 
+			-How to insert, Remove, etc.
+		-Recursion
+			-Writing and Evalutaion of recursive functions
+
+	Unimportant
+		-1 and 2
+
+	More Important
+		-3 and forward
+		
+	Notes:
+
+		CHP 4: Concepts
+			-Don't memorize ADT stuff, but can be asked to be built
+			-Try to learn the necesary things for ADR
+			-May be asked to implement Methods of ADT list
+				-May Specify linkedlist or array
+			-All ADT opperations
+
+			-No specific questions about Axioms
+
+		CHP 5: Linked Lists
+			-Expect to see them on midterm, aplications, implentation
+
+		CHP 6: Recursion
+		
+		CHP 7: Stacks
+		
+		CHP 8: Queues
+
+			May have to implent new data structures
+
+Review
+	Slides
+	Code Examples
+		-Specifically Stack and Queue
+			-Array and Reffrence Stacks
+			**Don't worry about the entirety of the class**
+	
+
+Question:
+	<T extends Comparable<? super T>>
+	//Some T extends comparable for some super T
