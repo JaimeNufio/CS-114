@@ -18,7 +18,7 @@ Lect 5:
 						-Recognize that no two queens can be in the same row! (Solutions # go to 8!)
 				Strategy:
 					Check each row, see if there is a valid pos for the queen in each column, then move to next
-					repeat until all queens can be placed.:w
+					repeat until all queens can be placed.
 
 
 Project 2:

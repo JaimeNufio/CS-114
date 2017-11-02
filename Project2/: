@@ -1,0 +1,108 @@
+//Jaime Nufio, CS114-05 Kapleau
+//Jen25 11/1/17
+
+//This assignment was really fun tbh
+
+public class KnightsTour{
+
+	public static void main(String[] args){
+
+			boolean[][] map = new boolean[Integer.parseInt(args[0])][Integer.parseInt(args[1])];
+		   	int initX = Integer.parseInt(args[2]), initY = Integer.parseInt(args[3]);
+
+			Tour theBoard = new Tour(map,initX,initY);
+	}
+
+}
+
+class Tour{
+
+	boolean[][] map;
+	private int initX, initY, count;
+	
+	public Tour(boolean[][] myMap, int x, int y){
+		map = myMap;
+		initX = x;
+		initY = y;
+		move(x,y);
+		System.out.println(this);
+	}
+
+	private boolean check(int x, int y){ // Check if the next move is valid
+		int len = map[0].length, wid = map.length;
+
+		//8 possibilities, check in order of 
+		//3X1Y, 1X3Y
+		//-3X1Y, -1X3Y
+		//-3X-1Y, -1X-3Y
+		//3X-1Y, -1Y3X
+	
+		//conditions for a failure
+		//	-outside of map
+		//	-the space has been visited already
+
+		//Condition for sucesss (Base)
+		//	-Count of steps is equal to 64 
+
+		if (x < 0 || x >= wid  || y < 0 || y >= len){
+			return false; //we are outside of the map
+		} else if (map[x][y]){	//have we visited this space before?
+			return false; //we are stepping on a visited space
+		}else if (count == len*wid){ //I think I can do away with this line, but lets keep it for now
+			return true;
+		}
+		return true; //there wasn't anything wrong with the spot we chose.
+
+	}
+
+	private boolean move(int tempX, int tempY){ //the recursive method
+		
+		if (check(tempX,tempY)){
+			map[tempX][tempY] = true; //mark as stepped.
+			count++; //update steps
+		
+			return count == map[0].length*map.length ? true : move(tempX,tempY);
+
+		}else{
+			
+			int[][] disp = {{2,1},{1,2},{-2,1},{-1,2},{-2,-1},{-1,-2},{2,-1},{-1,2}}; //Displacement from tempX and tempY resepctive
+
+				for (int i = 0; i<disp.length;i++){
+					if (check(tempX+disp[i][0],tempY+disp[i][1])){
+						//NOTE: here we acknowledge that the step is valid, but do not mark it as so, at least not until the next step in recurision
+						System.out.printf("Count %d: from (%d,%d) to (%d,%d)\n",count,tempX,tempY,tempX+disp[i][0],tempY+disp[i][1]);
+						move(tempX+disp[i][0],tempY+disp[i][1]);
+					}
+				}			
+				System.out.println("Ok... backtrack, loop failed");
+			return false; //after checking All possible moves, it turns out there wasn't an answer.
+		}
+	}	
+
+	public String toString(){
+		String temp = "";
+		for (int i = 0; i<map.length; i++){
+			temp+="\n "+i+":";
+			for (int j = 0; j<map[0].length; j++){
+				temp += map[i][j] ? " X " : " - ";
+			}
+		}
+		temp+="\n  -------------------------\n    0  1  2  3  4  5  6  7 ";
+		return temp;
+	}
+}
+
+/*In Pseudo
+ *
+ * boolean move(x,y){
+ * if check(x,y) is a valid pos
+ *		mark that spot as used, update count
+ *		
+ *		if count is 64 return true, if not move again
+ *
+ *else
+ 	FOR LOOP: list of all possible displacemnts (there are 8) 
+		check each one individually until one is valid
+		state the move
+	if for loop fails, return false (Back track)
+ */

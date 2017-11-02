@@ -1,48 +1,13 @@
 import java.util.Iterator;
 import java.util.Random;
 
-/*
+					/*
 	Jaime Nufio, Jen25
 	CS114-005, Prof Kapleau
+					*/
 
-	Vim w/ Tabstop=4.
-
-*/
 public class Project1{
 
-    public static void main(String[] args) {
-
-        Random rand = new Random(1);
-        SortedList<Integer> list = new SortedList<Integer>();
-        int m = args.length == 1 ? Integer.parseInt(args[0]) : 10;
-
-        System.out.println("insert");
-		for (int i = 0; i < m; ++i) {
-            int n = rand.nextInt(m);
-            list.insert(n);
-            System.out.print(n + ": ");
-            for (Integer j : list) {
-                System.out.print(j + " ");
-            }
-            System.out.println();
-        }
-	for(Integer i : list){
-		System.out.println(i);
-	}
-        // 	rand = new Random(1);
-
-        System.out.println("remove");
-        for (int i = 0; i < m; ++i) {
-            int n = rand.nextInt(m);
-            list.remove(n);
-            System.out.print(n + ": ");
-            for (Integer j : list) {
-                System.out.print(j + " ");
-            }
-            System.out.println();
-        }
-
-    }
 }
 
 abstract class List<E> implements Iterable<E> {
