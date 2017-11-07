@@ -7,11 +7,21 @@
 //	-corners only have two spaces they can go to
 //	-number is equal to legal moves
 //	-start anywhere
-//	-jump to square with lowest accesiblity 
+//	-jump to square with lowest accesiblity
+ 
 public class Project2{
 
 	public static void main(String[] arr){
-		Tour thing = new Tour(new int[]{8,8},new int[]{7,0});
+/*
+		if (arr.length == 2){
+			Tour thing = new Tour(new int[]{Integer.parseInt(arr[1]),Integer.parseInt(arr[0])});
+		}else if (arr.length == 4){
+			Tour thing = new Tour(new int[]{Integer.parseInt(arr[1]),Integer.parseInt(arr[0])},new int[]{Integer.parseInt(arr[2]),Integer.parseInt(arr[3])});
+		}else{
+			Tour thing = new Tour(new int[]{7,0});
+		}
+*/
+		Tour thing = new Tour (new int[]{7,0});
 	}
 
 }
@@ -20,66 +30,73 @@ public class Project2{
 class Tour{
 
 	int[][] map, disp = {{2,1},{1,2},{-2,1},{1,-2},{-2,-1},{-1,-2},{2,-1},{-1,2}};	
-	
+	int calls,size; //recursive calls
+
 	public Tour(int[] mapSize, int[] startPos){
-		
+		startPos=new int[]{startPos[0],startPos[1]-1};	
 		map = new int[mapSize[0]][mapSize[1]];
-		move(startPos);
+		size = map[0].length*map.length;
+		move(startPos,0);
 	}
 
 	public Tour(int[]  startPos){
+
 		map = new int[8][8];
-		move(startPos);
+		size = 64;
+		System.out.printf("Initial Position: (%d,%d)",startPos[0],startPos[1]);
+		move(startPos,0);
 	}
 
-	int cnt;
-
-	public boolean move(int[] temp){
-			
-		System.out.printf("Current Info: (%d,%d) Count: %d\n", temp[0],temp[1],cnt);	
+	public boolean move(int[] temp, int cnt){
+		
+	  	calls++;
 		int x = temp[0], y = temp[1];
-		if (cnt >= 64){
-			System.out.print(this);
-			return true;	
-		}else if (illegal(temp)){
+		if (illegal(temp)){
+
 			return false;
 		}else{
-
-			//Good postion
-
+			
 			cnt++;
-			map[x][y] = cnt;
+			this.map[x][y] = cnt;
 
-			int[] opts = new int[8];	
-			int optNum = 9;
-			for (int i = 0; i < 8; i++){
-				
-				opts[i] = options(sum(temp,disp[i]));	
-				if (illegal(sum(temp,disp[i]))){
-					opts[i] = 0;
-				}else if (opts[i] < optNum){
-					optNum = opts[i];
-				}
+			if (cnt == size){
+				System.out.printf("Recursive Calls: %d\n", calls);	
+				System.out.print(this);
+				return true;
 			}
+
+			int[] opts = analysis(temp);
+			int optNum = opts[8];
+			
 			for (int i = 0; i < 8; i++){
-				if (opts[i] != 0 && opts[i] == optNum && move(sum(temp,disp[i]))){
-					System.out.print(this);
+				if ( opts[i] == optNum && move(sum(temp,disp[i]),cnt)){ 
 					return true;
 				}
 			}
-
-			//	for (int i = 0; i < 8; i++){
-			//	if ( move(new int[]{x+disp[i][0],y+disp[i][1]})){
-			//	if (move(sum(temp,disp[0])) || move(sum(temp,disp[1])) || move(sum(temp,disp[2])) || move(sum(temp,disp[3])) 
-			//			|| move(sum(temp,disp[4])) || move(sum(temp,disp[5])) || move(sum(temp,disp[6])) || move(sum(temp,disp[7]))){		
-			//		return true;				
-			//	}
-
-			cnt--;
-			map[x][y] = 0;
-		//	System.out.println("Backtrack");
+		
+			this.map[x][y] = 0;
 			return false;
 		}
+	}
+
+	//Warnsdorf Hueristic
+	public int[] analysis(int[] temp){	//determin which future steps are valid (index line up with Displacement)
+
+		int[] opts = new int[9];	 //every knight has 8 option moves. 9th index stores the opt number!	
+		int optNum = 9;			//the option number will never exceed 8
+			
+		for (int i = 0; i < 8; i++){	// for each of these options
+				
+			if (!illegal(sum(temp,disp[i]))){
+			opts[i] = options(sum(temp,disp[i]));	//find the number of options the current option has
+			if (opts[i] < optNum){			//identify the lowest option Number and record it
+				optNum = opts[i];
+			}
+			}
+		}
+		opts[8] = optNum;
+		return opts;
+
 	}
 
 	public int options(int[] temp){
@@ -88,6 +105,7 @@ class Tour{
 			if (!illegal(sum(temp,disp[i])))
 				count++;
 		}
+		//System.out.printf("(%d,%d) has %d options\n",temp[0],temp[1],count);
 		return count;
 	}	
 
@@ -97,7 +115,7 @@ class Tour{
 
 		if (x < 0 || y < 0 || x >= map[0].length || y >= map.length){
 			return true;
-		}else if (map[x][y] != 0){
+		}else if (map[x][y] > 0){
 			return true;
 		}
 		return false;
@@ -110,15 +128,23 @@ class Tour{
 	public String toString(){
 
 		String temp = "";
-
-		for (int i = 0; i<map.length; i++){
+		int num;
+		for (int i = 0; i<this.map.length; i++){
+			temp+=(map[0].length-i)+": ";
 			for(int j = 0; j<map[0].length; j++){
-				temp+=" "+map[i][j]+" ";	
+				num = this.map[i][j];
+				temp+=num >9 ?  " "+num+"  " : "  "+num+"  ";	
 			}
 			temp+="\n";
 		}
+		String txt = "  ";
+		String bottomRow = "   ";
+		for (int i = 0; i< this.map[0].length; i++){
+			txt+="-----";
+			bottomRow+="  "+(i+1)+"  ";
+		}
 
-		return temp+"\n";
+		return temp+txt+"\n"+bottomRow+"\n";
 	}
 
 }
