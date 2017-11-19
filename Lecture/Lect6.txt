@@ -1,0 +1,82 @@
+Algorithim Efficency and Sorting
+Chp 10
+
+-3 Issues When Measuring Runtime
+	-Code of the Algorithim
+	-Computer Running it
+	-the data being used
+
+
+-Analysis shoud be independent of
+	-Specific implentations
+	-Computer running
+	-Data
+	
+We measure operations to get "speed"
+	-Excecution time is proportional to opperations
+
+
+	-Constant time = 1 O (Big O)
+
+	for m loops
+		n loops
+
+	m*n parts
+
+	Time is a function of problem size
+		-As size of inputs increases, how much longer does it take to solve the problem
+		
+		Ex:
+			-Algorithm 1 requires time proportional to n square
+			-Algorithim 2 requires time proportional to n
+
+			efficency is relative to scale
+
+Growth Rates
+	-Want growth to be slow
+
+Big O Notation
+	-Alg A is order f(n) denoted (O(f(n)) if constant k an n0 exist such that A requires no more than k*f(n) time unites to solvea  problem
+	of size n>=n0;
+
+	A=n^2 / 5; A = O(n^2)
+	
+	if
+
+	A<= k n^2, need two constants that that is true [for all] values n >= k
+
+	Converse:
+
+	B = n^3 / 1000 B != O(n^2)
+
+	prove B is of that order. can we pick a constant k, such that multiplied by n^2 is greater than n^2 for all values of n>=k
+
+	NO. n^3 will take over, and will take more steps regardless of the constant chosen.
+
+Constant Time
+	-Access from array
+
+Log Time
+	-Binary Search type, where we divide problem by 2
+		-1 in 100, guess at the middle
+
+Linear Time
+	-Grow with amount of inputs
+
+Order of Magnitude Analyis and Big O Notation
+	-Think of worst case
+	
+	Ex Search
+		Worst Case
+			-traverse all list, no good comparison true
+		Average Case
+			-n/2 
+		Best case
+			got it first time. (constant time)
+
+Trade Offs-
+	-More memory might make it fasters
+	-Time is our constraint in this class
+
+When we do math on the runtime, we are uninterest in low order parts, or multiplicative constants
+

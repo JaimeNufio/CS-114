@@ -1,0 +1,80 @@
+Sorting Algorithims
+
+Mergesort:
+	Divide and conquer
+	Disregard for order/state of data
+	Same behavior, regardless of original position
+
+	Strategy- Divide array into half, and divide each array recursively then merge them together, after sorted
+
+	Example: 
+		
+		Array[8] = {2,8,2,5,7,1,6,4};
+		
+		create 2 halfs
+		{2,8,2,5} and {7,1,6,4}
+		
+		Sort recursively.
+		{2,8} and {2,5}	and {7,1} and {6,4}
+
+		{3}{8} and {2}{5}
+		^  ^
+		layer above index 0 = 2
+		then add 1, 1 = 3
+		then add 1, 2 = 5
+		then add 1, 2 = 8
+
+		{2,3,5,8}
+
+		//when comparing the two arrays, start both at 0, of array a[0] and b[0], the smaller one becomes
+		c[0] and that one's index increases by one, such that if a[0] was larger, we move to a[1].
+
+		Continue until index of a and b both equal the size of array-1 
+
+	Comparsions - Order N
+	Levels - Log N Divisions 	
+	Ranked: O(N)*Log(N)
+
+	Efficent to time, but not to memory
+
+Quicksort:
+	Divided and Conquer
+	Best when already semi sorted
+
+	Worst: N^2
+	Average: N*LogN
+
+	Pick element from array, partition the array around that point (the pivot)
+		left will be less than pivot, right will be greater than pivot
+		one side should be = to pivot
+
+	Inplace or not Inplace, as you wish
+
+	
+	Array[8] = {5,7,1,4,8,2,3,6}
+	EmptyCopy[8] = Array;
+
+	pick pivot (deterministic quick sort can pick any element, doesn't matter for this particular case, "Deterministic")
+		Kapleau picked Array[0]
+
+	Smaller, add to front, else, add from back
+	{1,4,2,3,PIVOT,6,8,7} <- "lock down" pivot
+
+	recursively quick sort, pivots remain [0]
+
+	{1,3,2,4}			{6,7,8}
+	{PIVOT,3,2,4}			{PIVOT, 7, 8}
+	then do the non piots		{PIVOT,8}
+	{2,PIVOT,4}
+
+
+PROJECT 3: Heapsort
+
+	Million elements in under 30 seconds
+	Don't do linked lists 
+
+
+
+
+
+
