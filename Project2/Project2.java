@@ -21,7 +21,7 @@ public class Project2{
 			Tour thing = new Tour(new int[]{7,0});
 		}
 */
-		Tour thing = new Tour (new int[]{7,0});
+		Tour thing = new Tour (new int[]{0,7});
 	}
 
 }
@@ -58,6 +58,7 @@ class Tour{
 			
 			cnt++;
 			this.map[x][y] = cnt;
+			System.out.printf("to (%d,%d)\n",x,y);
 
 			if (cnt == size){
 				System.out.printf("Recursive Calls: %d\n", calls);	

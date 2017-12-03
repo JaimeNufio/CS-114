@@ -1,0 +1,77 @@
+Trees
+	Quick Definitions
+		-General Tree
+			has as many children as we want (set of N nodes)
+			partitioned into disjoint subsets
+				singe node, r, the Root
+			Set that are general trees are called subtrees of r
+
+		-Binary Tree is a set of T
+
+	Binary Search Example
+		n's value is greater than all values in its left subtree Tl
+		n's value is less than all values in its right subtree Tr
+		Tl and Tr are binary search trees
+
+	The height of trees
+		Level of a node n in a tree, children are level 2, children of level 2 ar level 3
+		if node not root of some tree or subtree, its level is 1 greater than parent
+
+	Height of tree defined by level on nodes
+		if T is empty, its h is 0
+		if T !empty its height is equal ot the maxium level of its nodes
+
+	WOrking in Trees is often (if not always) LogN time, N = height
+
+	Binary tree T is complete if
+		all nodes at level h-2 and aboce have 2 children
+		when a node at level h-1 has children all nodes to its left at the same level have 2 children each
+		When a node at level h-1 has one child it is a left child
+
+		Cannot have a Left note w/o a corresponding right node if all previous( from left) pairs are incomplete
+	
+
+	Summary of tree terminology
+
+		General tree
+			a set of one or more nodes, partitioned in a root node and subset taht are general subtrees of the root
+
+		Parent of node
+			the node directly above node n in the tree
+
+		Child of node n
+			 a node directly below a parent node in a tre
+		Root
+			the only node in the tree with no parent
+
+		Leaf
+			node with no children
+
+		Siblings
+			nodes with a common parent
+
+		Ancestor of node n
+			node on the path from root to n
+
+		Descendant of node n
+			a node on a path from n to a leaf (node is a descedent of itself, unless want set of proper descendants)
+
+		Subtree of node n
+	
+
+	ADT Binary Tree:
+
+
+		Kapleau skiped, called it standard
+		said he didn't like it
+
+
+	Traversal of a Tree:
+		Traversal is always Order n
+
+
+	
+	Array implentation is possible
+		Easier if tree is complete, and remains complete
+		-Note: heapsort is always complete
+

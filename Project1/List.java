@@ -16,4 +16,4 @@ public abstract class List<E> implements Iterable<E> {
     public abstract boolean search(E data);
 
     protected Node<E> head;
-}
+
