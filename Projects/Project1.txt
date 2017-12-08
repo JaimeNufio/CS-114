@@ -1,0 +1,126 @@
+import java.util.Iterator;
+import java.util.Random;
+
+                                        /*
+        Jaime Nufio, Jen25
+        CS114-005, Prof Kapleau
+                                        */
+
+
+public class SortedList<E extends Comparable<? super E>> extends List<E> {
+
+    public void insert(E data){
+	    
+		//I decided to settle the special case outside of the recursion. 
+		//This way we can avoid checking that one-tme condition over again.
+
+		Node<E>temp = new Node<E>(data);
+		
+		if (head == null || data.compareTo(head.data)<0){
+			temp.next = head;
+			head = temp;
+		}else{	
+			insert(temp, head);
+		}
+
+	}
+
+	private void insert(Node<E> temp, Node<E> curr){
+
+		//I feel like I used too many if statements.
+
+		if (curr.next != null){
+			if (temp.data.compareTo(curr.next.data) < 0){
+				temp.next = curr.next;
+				curr.next = temp;
+			}else{
+				insert(temp,curr.next);
+			}	
+		}else{
+			curr.next = temp;
+		}
+	}
+
+	public void remove(E data){
+		
+		//handle the special case w/o regression
+		
+		if (head != null){ 
+			if (data.compareTo(head.data) == 0)
+				head = head.next; 
+		}else
+			return; //empty set.
+	
+		remove(data, head);
+	}
+
+	private void remove(E data, Node<E> curr){
+
+		if (curr.next != null){
+			if(data.compareTo(curr.next.data) == 0){
+				curr.next = curr.next.next;
+				return;
+			}else
+				remove(data,curr.next);
+		}
+	}
+
+	public E retrieve(int index){
+		return retrieve(head,index,0);	
+	}
+
+	private E retrieve(Node<E> curr, int index, int count){
+		
+		if (count == index){
+			return curr.data;
+		}
+		if (curr.next != null)
+			return retrieve(curr.next,index,++count);
+		else
+			throw new IndexOutOfBoundsException();
+	}
+
+	public boolean search(E data){
+		return search(data, head);
+	}
+
+	private boolean search(E data, Node<E> curr){
+
+		//two cases. Find, or not found.
+		//Also, its kinda odd it doesn't 
+		//return the value, but hey. 
+		//Sometimes you just gotta know
+		//what's in a set lol
+
+		if (data.compareTo(curr.data) == 0){
+			return true;
+		}
+
+		if (curr.next != null){
+			return search(data,curr.next);
+		}
+		
+		return false;
+	}
+	
+		
+    public Iterator<E> iterator() {
+
+        return new Iterator<E>() {
+
+            public boolean hasNext() {
+                return curr != null;
+            }
+            public E next() {
+                E temp = curr.data;
+                curr = curr.next;
+                return temp;
+            }
+            public void remove() {
+				throw new UnsupportedOperationException();
+            }
+            private Node<E> curr = (Node<E>)head;
+        };
+    }
+}
+

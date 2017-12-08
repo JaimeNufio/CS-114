@@ -132,6 +132,8 @@ class SortedList<E extends Comparable<? super E>> extends List<E> {
 
         return new Iterator<E>() {
 
+	
+
             public boolean hasNext() {
                 return curr != null;
             }
