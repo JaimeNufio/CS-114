@@ -1,0 +1,37 @@
+
+
+Chapter 3: Recursion-
+	-A theme to the course, was prevelant throughout the course
+		-sorted list, knights tour
+	-will certainly be on final
+
+Chatper 4: Data Abstraction
+	-Didn't talk of theory, more just the instances
+	-COntainer class with reffrences to other objects
+	All Abstract data types have
+		-add
+		-remove
+		-possibly search
+
+Chapter 5: LinkedList
+	NOTE: BST not a linked list, but we are still using this concept
+	Modern Languages will have access to objects
+	-Data Structures will appear on exam
+
+Chapter 8: Queues
+	-Implementation of queues and less the ussage of them
+
+Chapter 10: Algorithims
+	-Sorting, and Trees
+	-We did not get to valanced binary trees
+
+Chatper 11: Trees
+	-Be aware of how to build a heap (buildheap, but drawn)
+
+
+sorting wont be heap,merge,
+
+more like insert, select bubble 
+
+ADT questions like exam 1
+
