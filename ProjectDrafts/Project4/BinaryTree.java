@@ -1,4 +1,4 @@
-abstract class BinaryTree<E> implements Iterable<E> {
+public abstract class BinaryTree<E> implements Iterable<E> {
 
     protected class Node<T> {
 

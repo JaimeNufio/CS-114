@@ -13,10 +13,10 @@ public class BinarySearchTree<E extends Comparable<? super E>> extends BinaryTre
 			return new Node<E>(data);
 		}else if (curr.data.compareTo(data) <= 0){ //less than equal b/c of duplicates
 			curr.left = insert(data,curr.left); 
-		}else if (curr.data.compareTo(data) > 0){
+		}else  (curr.data.compareTo(data) > 0){
 			curr.right = insert(data,curr.right);
 		}
-		return curr;
+//		return curr;
 	}
 
 	public void remove(E data){

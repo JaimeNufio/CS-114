@@ -78,11 +78,6 @@ public class BinarySearchTree<E extends Comparable<? super E>> extends BinaryTre
 			return search(data, curr.left);
 		}
 
-		//unless....
-		//
-		//unless.. unless...
-	
-
 		return search(data,curr.right);
 	}
  	
